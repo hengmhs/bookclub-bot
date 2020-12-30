@@ -1,4 +1,10 @@
-import json
+import json, os
+from dotenv import load_dotenv
+load_dotenv()
+
+API_TOKEN = os.getenv('API_TOKEN')
+
+print(API_TOKEN)
 
 with open("taleof2cities.txt","r") as f:
     story = f.read()
@@ -14,6 +20,6 @@ with open("counter.txt","w") as f2:
         counter = 1
     json.dump(counter,f2)
 
-print(chapters[counter])
+#print(chapters[counter])
 
 
