@@ -7,14 +7,20 @@ load_dotenv()
 TOKEN = os.getenv('API_TOKEN')
 CHAT_ID = -428895876
 
+# os directory name edits for pythonanywhere
+
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+counter_location = os.path.join(THIS_FOLDER, 'counter.txt')
+taleof2cities_location = os.path.join(THIS_FOLDER, 'taleof2cities.txt')
+
 # Start the bot
 updater = Updater(TOKEN, use_context=True)
 
 # counter starts at 2 because the link to Chapter 1 is at 02
-with open("counter.txt","r") as f2:
+with open(counter_location,"r") as f2:
     counter = json.load(f2)
 
-with open("taleof2cities.txt","r") as f:
+with open(taleof2cities_location,"r") as f:
     chapters = f.readlines()
     link = "http://www.gutenberg.org/files/98/98-h/98-h.htm#link2H_4_00"
 
@@ -32,7 +38,7 @@ with open("taleof2cities.txt","r") as f:
     current_chapter = counter - 2
     message = chapters[current_chapter] + " " + link + chapter_num
 
-with open("counter.txt","w") as f2:
+with open(counter_location,"w") as f2:
     counter += 1
     # len(chapters) = 45
     # chapters[44] is the last element in list = 46 is the last counter
